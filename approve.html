@@ -3,20 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Message — RealEdge AI</title>
+  <title>Review Message — RealEdge AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #080909;
-      --surface: #111314;
-      --border: #222527;
-      --accent: #d4f53c;
-      --accent-dim: rgba(212,245,60,0.1);
-      --text: #eeecea;
-      --text-2: #7a8080;
-      --error: #ff5c5c;
-      --success: #3cffa0;
+      --bg: #080909; --surface: #111314; --border: #222527; --accent: #d4f53c;
+      --accent-dim: rgba(212,245,60,0.1); --text: #eeecea; --text-2: #7a8080;
+      --error: #ff5c5c; --success: #3cffa0;
     }
     body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; width: 100%; max-width: 520px; animation: fadeUp 0.3s ease both; }
@@ -48,20 +42,26 @@
     .result-sub { font-size: 0.85rem; color: var(--text-2); }
     .form-area { transition: opacity 0.2s; }
     .form-area.hide { opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
+    .loading-state { text-align: center; padding: 40px 0; display: none; }
+    .loading-state .spin { display: block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 16px; }
+    .loading-state p { font-size: 0.9rem; color: var(--text-2); }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">RealEdge<span>AI</span></div>
 
+    <div id="loadingState" class="loading-state">
+      <div class="spin"></div>
+      <p id="loadingText">Processing...</p>
+    </div>
+
     <div class="form-area" id="formArea">
       <h1>Edit Message</h1>
       <p class="sub" id="subText">Review and edit the AI-drafted SMS before it sends to your lead.</p>
-
       <label>SMS Message</label>
       <textarea id="msgArea" maxlength="160" oninput="updateCount()"></textarea>
       <div class="char-count" id="charCount">0 / 160</div>
-
       <div class="btn-row">
         <button class="btn btn-primary" id="sendBtn" onclick="sendEdited()">
           <span class="btn-label">✅ Send Message</span>
@@ -84,14 +84,14 @@
     const draft = params.get('draft');
     const secret = params.get('secret');
     const base = params.get('base') || 'https://diligent-motivation-production-d330.up.railway.app';
+    const action = params.get('action') || 'edit';
 
-    if (!id || !secret) {
-      document.getElementById('subText').textContent = 'Invalid link. Please use the button from Slack.';
-      document.getElementById('msgArea').disabled = true;
-      document.getElementById('sendBtn').disabled = true;
-    } else {
-      document.getElementById('msgArea').value = draft || '';
-      updateCount();
+    function showResult(icon, title) {
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('formArea').classList.add('hide');
+      document.getElementById('resultIcon').textContent = icon;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('result').classList.add('show');
     }
 
     function updateCount() {
@@ -101,20 +101,12 @@
       el.className = 'char-count' + (len > 150 ? ' warn' : '');
     }
 
-    function showResult(icon, title) {
-      document.getElementById('formArea').classList.add('hide');
-      document.getElementById('resultIcon').textContent = icon;
-      document.getElementById('resultTitle').textContent = title;
-      document.getElementById('result').classList.add('show');
-    }
-
     async function sendEdited() {
       const msg = document.getElementById('msgArea').value.trim();
       if (!msg) return;
       const btn = document.getElementById('sendBtn');
       btn.classList.add('loading');
       btn.disabled = true;
-
       try {
         const res = await fetch(`${base}/api/approvals/${id}/edit`, {
           method: 'POST',
@@ -139,6 +131,42 @@
         });
       } catch {}
       showResult('⏭️', 'Message Skipped');
+    }
+
+    async function autoApprove() {
+      document.getElementById('formArea').classList.add('hide');
+      document.getElementById('loadingState').style.display = 'block';
+      document.getElementById('loadingText').textContent = 'Sending message...';
+      try {
+        const res = await fetch(`${base}/api/approvals/${id}/approve-link?secret=${secret}`);
+        showResult('✅', 'Message Sent!');
+      } catch (err) {
+        showResult('⚠️', 'Already Processed');
+      }
+    }
+
+    async function autoSkip() {
+      document.getElementById('formArea').classList.add('hide');
+      document.getElementById('loadingState').style.display = 'block';
+      document.getElementById('loadingText').textContent = 'Skipping...';
+      try {
+        await fetch(`${base}/api/approvals/${id}/reject-link?secret=${secret}`);
+      } catch {}
+      showResult('⏭️', 'Message Skipped');
+    }
+
+    // Init
+    if (!id || !secret) {
+      document.getElementById('subText').textContent = 'Invalid link. Please use the button from Slack.';
+      document.getElementById('msgArea').disabled = true;
+      document.getElementById('sendBtn').disabled = true;
+    } else if (action === 'approve') {
+      autoApprove();
+    } else if (action === 'skip') {
+      autoSkip();
+    } else {
+      document.getElementById('msgArea').value = draft || '';
+      updateCount();
     }
   </script>
 </body>
