@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Lead — RealEdge AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080909;
+      --surface: #111314;
+      --surface2: #181b1c;
+      --border: #222527;
+      --accent: #d4f53c;
+      --accent-dim: rgba(212, 245, 60, 0.12);
+      --accent-hover: #c8eb30;
+      --text: #eeecea;
+      --text-2: #7a8080;
+      --text-3: #3d4242;
+      --error: #ff5c5c;
+      --success: #3cffa0;
+      --radius: 10px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .logo span { color: var(--accent); }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Page title */
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .page-title span { color: var(--accent); }
+
+    .page-sub {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      margin-bottom: 40px;
+    }
+
+    /* Form card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    label .req {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 400;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--text-3);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    input.error, select.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(255, 92, 92, 0.1);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8080' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    select option {
+      background: var(--surface2);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.5;
+    }
+
+    .field-error {
+      font-size: 0.75rem;
+      color: var(--error);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .field-error.show { display: block; }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      padding: 15px 24px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover { background: var(--accent-hover); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-btn .btn-text { transition: opacity 0.2s; }
+    .submit-btn .btn-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .submit-btn.loading .btn-text { opacity: 0; }
+    .submit-btn.loading .btn-loading { opacity: 1; }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success state */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .success-state.show { display: block; }
+    .card.hide { display: none; }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.8rem;
+    }
+
+    .success-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .success-sub {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .success-meta {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .success-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      padding: 4px 0;
+    }
+
+    .success-meta-row .key { color: var(--text-2); }
+    .success-meta-row .val { color: var(--accent); font-weight: 500; }
+
+    .add-another-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-2);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .add-another-btn:hover {
+      border-color: var(--text-2);
+      color: var(--text);
+    }
+
+    /* Error toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1a0a0a;
+      border: 1px solid var(--error);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      color: var(--error);
+      transition: transform 0.3s ease;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+      .card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <div class="logo">RealEdge<span>AI</span></div>
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        Live
+      </div>
+    </header>
+
+    <h1 class="page-title">Add New <span>Lead</span></h1>
+    <p class="page-sub">AI responds within 60 seconds of submission.</p>
+
+    <!-- Form card -->
+    <div class="card" id="formCard">
+      <div class="section-label">Contact Info</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="Maria" autocomplete="given-name" />
+          <div class="field-error" id="firstNameErr">Required</div>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="lastName" placeholder="Garcia" autocomplete="family-name" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="(209) 555-1234" autocomplete="tel" />
+          <div class="field-error" id="phoneErr">Valid US phone required</div>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="maria@email.com" autocomplete="email" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Lead Details</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Source <span class="req">*</span></label>
+          <select id="source">
+            <option value="" disabled selected>Select source</option>
+            <option value="ZILLOW">Zillow</option>
+            <option value="REALTOR_COM">Realtor.com</option>
+            <option value="PAID_ADS">Paid Ads</option>
+            <option value="SOCIAL_MEDIA">Social Media</option>
+            <option value="OPEN_HOUSE">Open House</option>
+            <option value="REFERRAL">Referral</option>
+            <option value="OTHER">Other</option>
+          </select>
+          <div class="field-error" id="sourceErr">Required</div>
+        </div>
+        <div class="field">
+          <label>Budget</label>
+          <input type="text" id="budget" placeholder="$280k–$320k" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Timeline</label>
+        <input type="text" id="timeline" placeholder="e.g. Ready in 30–60 days" />
+      </div>
+
+      <div class="field">
+        <label>Initial Message / Notes</label>
+        <textarea id="notes" placeholder="Any context about this lead — what they said, how they found out about LGI, etc."></textarea>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitLead()">
+        <span class="btn-text">🚀 &nbsp;Submit Lead</span>
+        <span class="btn-loading"><div class="spinner"></div></span>
+      </button>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">⚡</div>
+      <h2 class="success-title">Lead Queued</h2>
+      <p class="success-sub">AI is drafting the first message now.<br>Check Slack for the approval notification.</p>
+      <div class="success-meta" id="successMeta"></div>
+      <button class="add-another-btn" onclick="resetForm()">+ Add Another Lead</button>
+    </div>
+  </div>
+
+  <footer>RealEdge AI · Powered by jlocollective</footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Config ────────────────────────────────────────────────
+    const API_URL = 'https://diligent-motivation-production-d330.up.railway.app/api/webhooks/lead';
+    const WEBHOOK_SECRET = 're_prod_2026_xK9mQpLwNvTz4hRjYcDb';
+    const TENANT_ID = 'cmmfwqj09000011ec3vhliwon';
+
+    // ── Phone formatter ───────────────────────────────────────
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if (val.length >= 7) val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
+      else if (val.length >= 4) val = `(${val.slice(0,3)}) ${val.slice(3)}`;
+      else if (val.length >= 1) val = `(${val}`;
+      e.target.value = val;
+    });
+
+    function toE164(phone) {
+      const digits = phone.replace(/\D/g, '');
+      if (digits.length === 10) return `+1${digits}`;
+      if (digits.length === 11 && digits[0] === '1') return `+${digits}`;
+      return null;
+    }
+
+    // ── Validation ────────────────────────────────────────────
+    function setError(fieldId, errId, show) {
+      const field = document.getElementById(fieldId);
+      const err = document.getElementById(errId);
+      if (show) {
+        field.classList.add('error');
+        err.classList.add('show');
+      } else {
+        field.classList.remove('error');
+        err.classList.remove('show');
+      }
+    }
+
+    function validate() {
+      let valid = true;
+
+      const firstName = document.getElementById('firstName').value.trim();
+      if (!firstName) { setError('firstName', 'firstNameErr', true); valid = false; }
+      else setError('firstName', 'firstNameErr', false);
+
+      const phone = document.getElementById('phone').value.trim();
+      const e164 = toE164(phone);
+      if (!e164) { setError('phone', 'phoneErr', true); valid = false; }
+      else setError('phone', 'phoneErr', false);
+
+      const source = document.getElementById('source').value;
+      if (!source) { setError('source', 'sourceErr', true); valid = false; }
+      else setError('source', 'sourceErr', false);
+
+      return valid;
+    }
+
+    // ── Toast ─────────────────────────────────────────────────
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 4000);
+    }
+
+    // ── Submit ────────────────────────────────────────────────
+    async function submitLead() {
+      if (!validate()) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const phone = toE164(document.getElementById('phone').value.trim());
+      const email = document.getElementById('email').value.trim();
+      const source = document.getElementById('source').value;
+      const budget = document.getElementById('budget').value.trim();
+      const timeline = document.getElementById('timeline').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      const payload = {
+        tenantId: TENANT_ID,
+        firstName,
+        phone,
+        source,
+        ...(lastName && { lastName }),
+        ...(email && { email }),
+        ...(budget && { budget }),
+        ...(timeline && { timeline }),
+        ...(notes && { initialMessage: notes }),
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-webhook-secret': WEBHOOK_SECRET,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          throw new Error(data?.error?.message || 'Submission failed');
+        }
+
+        // Show success
+        const sourceLabels = {
+          ZILLOW: 'Zillow', REALTOR_COM: 'Realtor.com', PAID_ADS: 'Paid Ads',
+          SOCIAL_MEDIA: 'Social Media', OPEN_HOUSE: 'Open House',
+          REFERRAL: 'Referral', OTHER: 'Other'
+        };
+
+        document.getElementById('successMeta').innerHTML = `
+          <div class="success-meta-row"><span class="key">Lead</span><span class="val">${firstName}${lastName ? ' ' + lastName : ''}</span></div>
+          <div class="success-meta-row"><span class="key">Phone</span><span class="val">${phone}</span></div>
+          <div class="success-meta-row"><span class="key">Source</span><span class="val">${sourceLabels[source]}</span></div>
+          <div class="success-meta-row"><span class="key">Lead ID</span><span class="val">${data.leadId.slice(0,12)}...</span></div>
+        `;
+
+        document.getElementById('formCard').classList.add('hide');
+        document.getElementById('successState').classList.add('show');
+
+      } catch (err) {
+        showToast('⚠️ ' + (err.message || 'Something went wrong'));
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // ── Reset ─────────────────────────────────────────────────
+    function resetForm() {
+      document.getElementById('firstName').value = '';
+      document.getElementById('lastName').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('source').value = '';
+      document.getElementById('budget').value = '';
+      document.getElementById('timeline').value = '';
+      document.getElementById('notes').value = '';
+
+      const btn = document.getElementById('submitBtn');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+
+      document.getElementById('formCard').classList.remove('hide');
+      document.getElementById('successState').classList.remove('show');
+    }
+
+    // ── Enter key support ─────────────────────────────────────
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.metaKey) submitLead();
+    });
+  </script>
+
+</body>
+</html>
