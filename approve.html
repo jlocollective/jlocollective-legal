@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Message — RealEdge AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080909;
+      --surface: #111314;
+      --border: #222527;
+      --accent: #d4f53c;
+      --accent-dim: rgba(212,245,60,0.1);
+      --text: #eeecea;
+      --text-2: #7a8080;
+      --error: #ff5c5c;
+      --success: #3cffa0;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; width: 100%; max-width: 520px; animation: fadeUp 0.3s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 24px; color: var(--text-2); }
+    .logo span { color: var(--accent); }
+    h1 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .sub { font-size: 0.85rem; color: var(--text-2); margin-bottom: 28px; line-height: 1.5; }
+    label { display: block; font-size: 0.72rem; font-weight: 500; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    textarea { width: 100%; background: #0e1010; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.6; padding: 14px 16px; resize: vertical; min-height: 120px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+    textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .char-count { font-size: 0.75rem; color: var(--text-2); text-align: right; margin-top: 6px; margin-bottom: 20px; }
+    .char-count.warn { color: var(--error); }
+    .btn-row { display: flex; gap: 12px; }
+    .btn { flex: 1; border: none; border-radius: 10px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; padding: 13px 16px; cursor: pointer; transition: opacity 0.15s, transform 0.1s; position: relative; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: #0a0a0a; }
+    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+    .btn-secondary:hover { border-color: var(--text-2); color: var(--text); }
+    .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.2); border-top-color: #0a0a0a; border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn.loading .btn-label { opacity: 0; }
+    .btn.loading .spinner { display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .result { display: none; text-align: center; padding: 32px 0 8px; }
+    .result.show { display: block; }
+    .result-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .result-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; }
+    .result-sub { font-size: 0.85rem; color: var(--text-2); }
+    .form-area { transition: opacity 0.2s; }
+    .form-area.hide { opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">RealEdge<span>AI</span></div>
+
+    <div class="form-area" id="formArea">
+      <h1>Edit Message</h1>
+      <p class="sub" id="subText">Review and edit the AI-drafted SMS before it sends to your lead.</p>
+
+      <label>SMS Message</label>
+      <textarea id="msgArea" maxlength="160" oninput="updateCount()"></textarea>
+      <div class="char-count" id="charCount">0 / 160</div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" id="sendBtn" onclick="sendEdited()">
+          <span class="btn-label">✅ Send Message</span>
+          <div class="spinner"></div>
+        </button>
+        <button class="btn btn-secondary" onclick="skipMsg()">⏭️ Skip</button>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <div class="result-icon" id="resultIcon"></div>
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-sub" id="resultSub">You can close this tab.</div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const draft = params.get('draft');
+    const secret = params.get('secret');
+    const base = params.get('base') || 'https://diligent-motivation-production-d330.up.railway.app';
+
+    if (!id || !secret) {
+      document.getElementById('subText').textContent = 'Invalid link. Please use the button from Slack.';
+      document.getElementById('msgArea').disabled = true;
+      document.getElementById('sendBtn').disabled = true;
+    } else {
+      document.getElementById('msgArea').value = draft || '';
+      updateCount();
+    }
+
+    function updateCount() {
+      const len = document.getElementById('msgArea').value.length;
+      const el = document.getElementById('charCount');
+      el.textContent = `${len} / 160`;
+      el.className = 'char-count' + (len > 150 ? ' warn' : '');
+    }
+
+    function showResult(icon, title) {
+      document.getElementById('formArea').classList.add('hide');
+      document.getElementById('resultIcon').textContent = icon;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('result').classList.add('show');
+    }
+
+    async function sendEdited() {
+      const msg = document.getElementById('msgArea').value.trim();
+      if (!msg) return;
+      const btn = document.getElementById('sendBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${base}/api/approvals/${id}/edit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-webhook-secret': secret },
+          body: JSON.stringify({ editedMessage: msg }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error?.message || 'Failed');
+        showResult('✅', 'Message Sent!');
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        alert('Error: ' + err.message);
+      }
+    }
+
+    async function skipMsg() {
+      try {
+        await fetch(`${base}/api/approvals/${id}/reject`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-webhook-secret': secret },
+        });
+      } catch {}
+      showResult('⏭️', 'Message Skipped');
+    }
+  </script>
+</body>
+</html>
