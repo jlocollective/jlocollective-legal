@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — JLO Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0f0f0f;
+      --ink-mid:   #3a3a3a;
+      --ink-light: #6b6b6b;
+      --rule:      #e2e2e2;
+      --accent:    #1a4d8f;
+      --accent-lt: #edf2fa;
+      --bg:        #fafaf8;
+      --white:     #ffffff;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .wordmark span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-light);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color .15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 64px 40px 52px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      font-size: 13px;
+      color: var(--ink-light);
+    }
+
+    .hero-meta-item strong {
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0 64px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 88px;
+      padding: 40px 0;
+      border-right: 1px solid var(--rule);
+      padding-right: 32px;
+    }
+
+    .toc-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .toc a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-light);
+      text-decoration: none;
+      display: block;
+      padding: 5px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      margin-left: -12px;
+      transition: all .15s;
+      line-height: 1.4;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    .content { padding: 40px 0; }
+
+    .section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 24px 0 10px;
+      letter-spacing: 0.01em;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--ink-mid);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    li {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    ol { counter-reset: ol-counter; }
+    ol li { counter-increment: ol-counter; }
+    ol li::before {
+      content: counter(ol-counter) '.';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 12px;
+      top: 5px;
+    }
+
+    .highlight {
+      background: var(--accent-lt);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .highlight p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* SMS consent box — the most important element for A2P */
+    .sms-consent-box {
+      background: #fff8e6;
+      border: 1px solid #f0cc6a;
+      border-left: 4px solid #d4a017;
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .sms-consent-box .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a07a00;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .sms-consent-box p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #6b4e00;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    .sms-consent-box p:last-child { margin: 0; }
+
+    .sms-consent-box .keywords {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #8b6200;
+      font-weight: 600;
+      background: rgba(212,160,23,0.12);
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 2px 0;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 24px;
+    }
+
+    .contact-card p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .contact-card a {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .contact-card a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 32px 40px;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 700px) {
+      header { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 40px 20px 36px; }
+      .page-wrap {
+        grid-template-columns: 1fr;
+        padding: 0 20px 60px;
+        gap: 0;
+      }
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">JLO <span>Collective</span></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/jlocollective-legal/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/jlocollective-legal/terms.html">Terms &amp; Conditions</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div style="background: var(--white); border-bottom: 1px solid var(--rule);">
+  <div class="hero">
+    <div class="hero-eyebrow">Legal · Terms</div>
+    <h1>Terms &amp; Conditions</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>Effective Date:</strong> March 9, 2025</div>
+      <div class="hero-meta-item"><strong>Last Updated:</strong> March 9, 2025</div>
+      <div class="hero-meta-item"><strong>Entity:</strong> JLO Collective</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#acceptance">Acceptance of Terms</a></li>
+      <li><a href="#services">Our Services</a></li>
+      <li><a href="#sms-terms">SMS Messaging Terms</a></li>
+      <li><a href="#user-conduct">User Conduct</a></li>
+      <li><a href="#intellectual-property">Intellectual Property</a></li>
+      <li><a href="#disclaimers">Disclaimers</a></li>
+      <li><a href="#limitation">Limitation of Liability</a></li>
+      <li><a href="#indemnification">Indemnification</a></li>
+      <li><a href="#governing-law">Governing Law</a></li>
+      <li><a href="#changes">Changes to Terms</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </aside>
+
+  <main class="content">
+
+    <div class="highlight">
+      <p>Please read these Terms and Conditions carefully before using JLO Collective's services or communications. By submitting an inquiry or engaging with our communications, you agree to be bound by these terms.</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="section" id="acceptance">
+      <span class="section-number">01</span>
+      <h2>Acceptance of Terms</h2>
+      <p>These Terms and Conditions ("Terms") govern your use of services provided by JLO Collective ("we," "us," or "our"), including our real estate lead management services, SMS communications, and any associated digital tools or platforms.</p>
+      <p>By submitting a real estate inquiry form, providing your contact information, or engaging with any of our communications, you agree to these Terms. If you do not agree, please do not submit your information or engage with our services.</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="section" id="services">
+      <span class="section-number">02</span>
+      <h2>Our Services</h2>
+      <p>JLO Collective provides real estate sales assistance services, including:</p>
+      <ul>
+        <li>Responding to and managing residential real estate buyer inquiries</li>
+        <li>Scheduling property tours and buyer consultations</li>
+        <li>Follow-up communications via SMS, phone, and email</li>
+        <li>Pipeline management and buyer tracking for real estate transactions</li>
+      </ul>
+      <p>Our services are intended for adults aged 18 and older who are interested in purchasing residential real estate. We are not a licensed broker or dealer of real estate; we provide sales assistance services on behalf of licensed real estate professionals.</p>
+    </div>
+
+    <!-- 3 — THE CRITICAL SECTION FOR A2P -->
+    <div class="section" id="sms-terms">
+      <span class="section-number">03</span>
+      <h2>SMS Messaging Terms</h2>
+
+      <p>This section governs all SMS (text message) communications between JLO Collective and you. These terms comply with the Telephone Consumer Protection Act (TCPA), applicable FCC regulations, and CTIA guidelines for A2P (application-to-person) messaging.</p>
+
+      <div class="sms-consent-box">
+        <span class="label">📋 SMS Consent — Required Reading</span>
+        <p>By providing your mobile phone number and submitting a real estate inquiry, you expressly consent to receive recurring automated and manually-initiated SMS text messages from JLO Collective at the phone number provided. This consent is not a condition of any purchase or service.</p>
+        <p>Message and data rates may apply. Message frequency varies — you may receive up to 10 messages per month. To opt out at any time, reply: <span class="keywords">STOP</span></p>
+        <p>For help, reply: <span class="keywords">HELP</span> &nbsp; or contact us at <strong>jlo.collective@gmail.com</strong></p>
+      </div>
+
+      <h3>How Consent Is Obtained</h3>
+      <p>We obtain your consent to receive SMS messages through one or more of the following methods:</p>
+      <ul>
+        <li>Submission of an online inquiry form that includes SMS consent disclosure language</li>
+        <li>Verbal consent provided during a phone or in-person interaction</li>
+        <li>Written sign-up sheet or lead card at an open house or event</li>
+        <li>Inquiry submitted through a third-party real estate platform (Zillow, Realtor.com, etc.) that includes SMS consent in their terms</li>
+      </ul>
+
+      <h3>Types of SMS Messages We Send</h3>
+      <p>Depending on your inquiry and engagement, you may receive:</p>
+      <ul>
+        <li>Initial response to your real estate inquiry (within minutes of your inquiry)</li>
+        <li>Follow-up messages checking on your home-buying progress</li>
+        <li>Appointment confirmations and reminders</li>
+        <li>Property availability updates relevant to your search criteria</li>
+        <li>Responses to messages you send us</li>
+      </ul>
+
+      <h3>Opt-Out Instructions</h3>
+      <p>You may stop receiving SMS messages at any time by:</p>
+      <ul>
+        <li>Replying <strong>STOP</strong> to any text message (you will receive one final confirmation, then no further messages)</li>
+        <li>Emailing <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a> with your opt-out request</li>
+        <li>Contacting us directly and requesting removal</li>
+      </ul>
+      <p>After opting out, we will maintain a record of your opt-out status to ensure you are not contacted again via SMS. Opting out of SMS does not affect any other communication methods unless you also request those.</p>
+
+      <h3>Supported Keywords</h3>
+      <p>The following keywords are recognized and processed automatically by our messaging system:</p>
+      <ul>
+        <li><strong>STOP / STOPALL / UNSUBSCRIBE / CANCEL / END / QUIT</strong> — Immediately opt out of all SMS communications</li>
+        <li><strong>START / UNSTOP / YES</strong> — Re-subscribe to SMS communications after a previous opt-out</li>
+        <li><strong>HELP</strong> — Receive information about our SMS program and how to contact us</li>
+      </ul>
+
+      <h3>Quiet Hours</h3>
+      <p>We respect your time. Our systems enforce quiet hours and will not send automated SMS messages between 8:00 PM and 8:00 AM in your local time zone. Messages received during quiet hours may be responded to during normal business hours.</p>
+
+      <h3>Message and Data Rates</h3>
+      <p>Standard message and data rates from your mobile carrier may apply to SMS messages you send and receive. JLO Collective does not charge any fees for SMS communications. Contact your mobile carrier for information about your messaging plan.</p>
+
+      <h3>Carrier Limitation</h3>
+      <p>SMS delivery is subject to availability and the policies of your mobile carrier. JLO Collective is not liable for delays or failures in SMS delivery caused by mobile network conditions.</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="section" id="user-conduct">
+      <span class="section-number">04</span>
+      <h2>User Conduct</h2>
+      <p>When interacting with our services and communications, you agree to:</p>
+      <ul>
+        <li>Provide accurate and truthful contact information</li>
+        <li>Not impersonate any person or entity</li>
+        <li>Not use our services for any unlawful purpose</li>
+        <li>Not attempt to interfere with or disrupt our systems</li>
+        <li>Not send harassing, abusive, or threatening messages to our team</li>
+      </ul>
+      <p>We reserve the right to discontinue communications with any individual who violates these conduct standards.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="section" id="intellectual-property">
+      <span class="section-number">05</span>
+      <h2>Intellectual Property</h2>
+      <p>All content, materials, and communications produced by JLO Collective — including but not limited to text, graphics, logos, and software — are the property of JLO Collective or its licensors and are protected by applicable intellectual property laws.</p>
+      <p>You may not reproduce, distribute, or create derivative works from our content without our express written permission.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="section" id="disclaimers">
+      <span class="section-number">06</span>
+      <h2>Disclaimers</h2>
+      <p>Our services are provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that:</p>
+      <ul>
+        <li>Our services will be uninterrupted or error-free</li>
+        <li>Any specific real estate transaction will result from our services</li>
+        <li>Information provided regarding properties, pricing, or availability is guaranteed to be current or accurate</li>
+      </ul>
+      <p>Real estate transactions involve multiple parties and are subject to market conditions, financing, and other factors outside our control. Nothing in our communications constitutes a guarantee of any real estate transaction outcome.</p>
+      <p>Our SMS communications may include AI-assisted message drafting. All messages are reviewed and approved by our team before sending and represent our genuine communication, not fabricated information.</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="section" id="limitation">
+      <span class="section-number">07</span>
+      <h2>Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, JLO Collective shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of our services or communications, including but not limited to lost profits, lost data, or business interruption.</p>
+      <p>Our total liability for any claim arising from these Terms or our services shall not exceed the amount, if any, paid by you to JLO Collective in the twelve months preceding the claim.</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="section" id="indemnification">
+      <span class="section-number">08</span>
+      <h2>Indemnification</h2>
+      <p>You agree to indemnify, defend, and hold harmless JLO Collective and its agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or in connection with your violation of these Terms or your use of our services.</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="section" id="governing-law">
+      <span class="section-number">09</span>
+      <h2>Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the State of California, without regard to conflict of law principles. Any disputes arising under these Terms shall be resolved in the state or federal courts located in San Joaquin County, California.</p>
+      <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full force and effect.</p>
+    </div>
+
+    <!-- 10 -->
+    <div class="section" id="changes">
+      <span class="section-number">10</span>
+      <h2>Changes to These Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the "Last Updated" date at the top of this page. Continued use of our services after changes are posted constitutes acceptance of the revised Terms.</p>
+      <p>We recommend reviewing these Terms periodically to stay informed of any updates.</p>
+    </div>
+
+    <!-- 11 -->
+    <div class="section" id="contact">
+      <span class="section-number">11</span>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about these Terms and Conditions or our SMS communications program, please contact us:</p>
+      <div class="contact-card">
+        <p><strong>JLO Collective</strong><br />
+        Real Estate Services<br />
+        Stockton, California<br /><br />
+        📧 <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a><br /><br />
+        To opt out of SMS: Reply <strong>STOP</strong> to any text, or email us above.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p>© 2025 JLO Collective. All rights reserved. &nbsp;·&nbsp;
+  <a href="/jlocollective-legal/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+  <a href="/jlocollective-legal/terms.html">Terms &amp; Conditions</a>
+  </p>
+</footer>
+
+</body>
+</html>

@@ -3,301 +3,588 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — SIGND.AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Privacy Policy — JLO Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0e0f11;
-      --surface: #16181c;
-      --border: #2a2d33;
-      --accent: #4CB8FF;
-      --text-primary: #f0f0ee;
-      --text-secondary: #8a8f9a;
-      --text-muted: #555b66;
+      --ink:       #0f0f0f;
+      --ink-mid:   #3a3a3a;
+      --ink-light: #6b6b6b;
+      --rule:      #e2e2e2;
+      --accent:    #1a4d8f;
+      --accent-lt: #edf2fa;
+      --bg:        #fafaf8;
+      --white:     #ffffff;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
+      font-family: var(--sans);
       background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
+      color: var(--ink);
+      font-size: 16px;
       line-height: 1.75;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Header ── */
     header {
-      border-bottom: 1px solid var(--border);
-      padding: 28px 48px;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
 
-    .logo span {
+    .wordmark span {
       color: var(--accent);
     }
 
-    .badge {
-      font-size: 0.72rem;
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
       font-weight: 500;
-      color: var(--text-muted);
+      color: var(--ink-light);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color .15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 64px 40px 52px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-    }
-
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 72px 48px 120px;
-    }
-
-    .page-label {
-      font-size: 0.72rem;
-      font-weight: 500;
       color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
       margin-bottom: 20px;
     }
 
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      font-size: 13px;
+      color: var(--ink-light);
+    }
+
+    .hero-meta-item strong {
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0 64px;
+      align-items: start;
+    }
+
+    /* ── TOC Sidebar ── */
+    .toc {
+      position: sticky;
+      top: 88px;
+      padding: 40px 0;
+      border-right: 1px solid var(--rule);
+      padding-right: 32px;
+    }
+
+    .toc-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
       margin-bottom: 16px;
     }
 
-    .effective-date {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 64px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid var(--border);
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    section {
+    .toc a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-light);
+      text-decoration: none;
+      display: block;
+      padding: 5px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      margin-left: -12px;
+      transition: all .15s;
+      line-height: 1.4;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    /* ── Main Content ── */
+    .content {
+      padding: 40px 0;
+    }
+
+    .section {
       margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
     }
 
     h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.35rem;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 24px 0 10px;
+      letter-spacing: 0.01em;
     }
 
     p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
+      font-size: 15px;
+      color: var(--ink-mid);
       margin-bottom: 16px;
+      line-height: 1.8;
     }
 
-    ul {
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 0;
       list-style: none;
       margin-bottom: 16px;
     }
 
-    ul li {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      padding: 6px 0 6px 20px;
+    li {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      padding: 4px 0 4px 20px;
       position: relative;
     }
 
     ul li::before {
-      content: '—';
+      content: '–';
       position: absolute;
       left: 0;
       color: var(--accent);
-      font-size: 0.85rem;
+      font-weight: 500;
     }
 
-    a {
+    ol { counter-reset: ol-counter; }
+    ol li { counter-increment: ol-counter; }
+    ol li::before {
+      content: counter(ol-counter) '.';
+      position: absolute;
+      left: 0;
       color: var(--accent);
+      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 12px;
+      top: 5px;
+    }
+
+    /* ── Highlight box ── */
+    .highlight {
+      background: var(--accent-lt);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .highlight p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ── SMS-specific callout ── */
+    .sms-box {
+      background: #f0f7ee;
+      border: 1px solid #c3dfc0;
+      border-left: 3px solid #3a8a32;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .sms-box .sms-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3a8a32;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .sms-box p {
+      margin: 0;
+      font-size: 14px;
+      color: #2a5e25;
+      line-height: 1.65;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 24px;
+    }
+
+    .contact-card p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .contact-card a {
+      color: var(--accent);
+      font-weight: 500;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    .contact-card a:hover { text-decoration: underline; }
 
-    .highlight-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      padding: 20px 24px;
-      border-radius: 4px;
-      margin-bottom: 16px;
-    }
-
-    .highlight-box p {
-      margin-bottom: 0;
-      font-size: 0.92rem;
-    }
-
+    /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
       text-align: center;
+      padding: 32px 40px;
+      font-size: 13px;
     }
 
-    footer p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-  
-    /* ── SIGND.AI Wordmark ── */
-    .signd-wordmark {
-      display: flex;
-      align-items: baseline;
-      gap: 0;
-      line-height: 1;
-    }
-    .signd-name {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
-      color: #C8D4E0;
-    }
-    .signd-dot {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .signd-ai {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
     }
 
+    footer a:hover { color: #fff; }
+
+    /* ── Mobile ── */
+    @media (max-width: 700px) {
+      header { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 40px 20px 36px; }
+      .page-wrap {
+        grid-template-columns: 1fr;
+        padding: 0 20px 60px;
+        gap: 0;
+      }
+      .toc { display: none; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-  <div class="signd-wordmark">
-  <span class="signd-name">SIGND</span><span class="signd-dot">.</span><span class="signd-ai">AI</span>
-</div>
-    
-    <div class="badge">Legal</div>
-  </header>
+<!-- ── Header ── -->
+<header>
+  <a class="wordmark" href="/">JLO <span>Collective</span></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/jlocollective-legal/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/jlocollective-legal/terms.html">Terms &amp; Conditions</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <div class="page-label">Legal Document</div>
+<!-- ── Hero ── -->
+<div style="background: var(--white); border-bottom: 1px solid var(--rule);">
+  <div class="hero">
+    <div class="hero-eyebrow">Legal · Privacy</div>
     <h1>Privacy Policy</h1>
-    <p class="effective-date">Effective Date: March 1, 2026 &nbsp;·&nbsp; Last Updated: March 6, 2026</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>Effective Date:</strong> March 9, 2025</div>
+      <div class="hero-meta-item"><strong>Last Updated:</strong> March 9, 2025</div>
+      <div class="hero-meta-item"><strong>Entity:</strong> JLO Collective</div>
+    </div>
+  </div>
+</div>
 
-    <section>
-      <h2>1. Overview</h2>
-      <p>SIGND.AI ("we," "us," or "our") is a software platform operated by jlocollective that provides automated real estate lead response and follow-up services for licensed real estate agents. This Privacy Policy explains how we collect, use, disclose, and protect personal information in connection with our services.</p>
-      <p>By using our platform or receiving communications facilitated through our system, you agree to the terms described in this policy.</p>
-    </section>
+<!-- ── Body ── -->
+<div class="page-wrap">
 
-    <section>
-      <h2>2. Information We Collect</h2>
-      <p>We collect the following categories of personal information:</p>
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#information-we-collect">Information We Collect</a></li>
+      <li><a href="#sms-communications">SMS Communications</a></li>
+      <li><a href="#how-we-use">How We Use Your Information</a></li>
+      <li><a href="#sharing">Sharing Your Information</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#changes">Changes to This Policy</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <div class="highlight">
+      <p>This Privacy Policy describes how JLO Collective ("we," "us," or "our") collects, uses, and protects information you provide when you interact with our real estate services and communications, including SMS text messaging.</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="section" id="information-we-collect">
+      <span class="section-number">01</span>
+      <h2>Information We Collect</h2>
+
+      <h3>Information You Provide Directly</h3>
+      <p>When you submit an inquiry, contact form, or sign-up sheet, we may collect:</p>
       <ul>
-        <li>Full name and contact information (phone number, email address)</li>
-        <li>Property inquiry details submitted through real estate platforms</li>
-        <li>SMS and communication history between leads and agents</li>
-        <li>Device and usage data when interacting with our platform</li>
-        <li>Agent account information including name, brokerage, and credentials</li>
+        <li>Full name</li>
+        <li>Phone number (mobile or landline)</li>
+        <li>Email address</li>
+        <li>Home-buying timeline, budget, and preferences</li>
+        <li>Any message or notes you include in your inquiry</li>
       </ul>
-    </section>
 
-    <section>
-      <h2>3. How We Use Your Information</h2>
-      <p>We use collected information for the following purposes:</p>
+      <h3>Information Collected Automatically</h3>
+      <p>When you visit our website or interact with our digital content, we may collect:</p>
       <ul>
-        <li>Sending automated and agent-approved SMS follow-up messages to real estate inquiries</li>
-        <li>Managing lead pipelines and sales sequences on behalf of real estate agents</li>
-        <li>Improving AI response quality and platform performance</li>
-        <li>Complying with legal obligations including TCPA and carrier regulations</li>
-        <li>Providing platform analytics and reporting to agents</li>
+        <li>IP address and general location</li>
+        <li>Browser type and device information</li>
+        <li>Pages visited and time spent on site</li>
+        <li>Referring source (how you found us)</li>
       </ul>
-    </section>
 
-    <section>
-      <h2>4. SMS Messaging &amp; Opt-Out</h2>
-      <div class="highlight-box">
-        <p>End users who have submitted inquiries through real estate platforms consent to receive SMS communications regarding their property inquiry. Every message sent through our platform includes opt-out instructions.</p>
+      <h3>Information from Third-Party Platforms</h3>
+      <p>If you inquire through third-party real estate platforms (such as Zillow, Realtor.com, or Facebook), we may receive the contact information and inquiry details you provided on those platforms.</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="section" id="sms-communications">
+      <span class="section-number">02</span>
+      <h2>SMS &amp; Text Message Communications</h2>
+
+      <div class="sms-box">
+        <span class="sms-label">📱 SMS Consent Notice</span>
+        <p>By providing your phone number and submitting an inquiry form, you expressly consent to receive automated and manually-sent SMS text messages from JLO Collective regarding real estate services, property information, and appointment scheduling. Consent is not a condition of purchase. Message and data rates may apply.</p>
       </div>
-      <p>To stop receiving messages at any time, reply <strong>STOP</strong> to any SMS you receive. Your number will be immediately added to our opt-out list and no further messages will be sent.</p>
-      <p>Message and data rates may apply. Message frequency varies based on inquiry activity.</p>
-    </section>
 
-    <section>
-      <h2>5. Information Sharing</h2>
-      <p>We do not sell personal information. We may share information with:</p>
+      <h3>What We Send</h3>
+      <p>We may send SMS messages containing:</p>
       <ul>
-        <li>Licensed real estate agents using our platform to respond to your inquiry</li>
-        <li>Twilio Inc. for SMS delivery services</li>
-        <li>Anthropic for AI message generation (no PII retained by Anthropic)</li>
-        <li>Infrastructure providers (Railway, cloud hosting) under data processing agreements</li>
-        <li>Law enforcement or legal process when required by law</li>
+        <li>Initial response to your real estate inquiry</li>
+        <li>Follow-up messages regarding properties or appointments</li>
+        <li>Scheduling confirmations and reminders</li>
+        <li>Informational updates about available homes or promotions</li>
+        <li>Responses to your inbound messages</li>
       </ul>
-    </section>
 
-    <section>
-      <h2>6. Data Retention</h2>
-      <p>We retain lead and communication data for up to 24 months from the date of last activity, or as required by applicable law. Agents may request deletion of their account data at any time. Opt-out records are retained indefinitely to ensure compliance.</p>
-    </section>
+      <h3>Message Frequency</h3>
+      <p>Message frequency varies based on your inquiry and engagement. You may receive up to 10 messages per month. We do not send unsolicited bulk marketing messages.</p>
 
-    <section>
-      <h2>7. Your Rights</h2>
-      <p>Depending on your location, you may have the right to:</p>
+      <h3>How to Opt Out</h3>
+      <p>You may opt out of SMS communications at any time by replying <strong>STOP</strong> to any text message. After opting out, you will receive one final confirmation message and no further SMS messages will be sent. You may also opt out by emailing us at <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a>.</p>
+
+      <h3>Getting Help</h3>
+      <p>Reply <strong>HELP</strong> to any message to receive assistance, or contact us at <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a>.</p>
+
+      <h3>Carrier Disclaimer</h3>
+      <p>Message and data rates may apply. JLO Collective is not responsible for any charges incurred from your mobile carrier related to receiving SMS messages.</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="section" id="how-we-use">
+      <span class="section-number">03</span>
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
       <ul>
-        <li>Access the personal information we hold about you</li>
-        <li>Request correction or deletion of your data</li>
-        <li>Opt out of SMS communications at any time by replying STOP</li>
-        <li>Lodge a complaint with a data protection authority</li>
+        <li>Respond to your real estate inquiry promptly</li>
+        <li>Schedule and confirm property tours or consultations</li>
+        <li>Send SMS messages you have consented to receive</li>
+        <li>Maintain a record of our communications with you</li>
+        <li>Improve our services and communication quality</li>
+        <li>Comply with applicable laws and regulations, including TCPA</li>
+        <li>Prevent fraud and protect the security of our systems</li>
       </ul>
-      <p>To exercise these rights, contact us at the email below.</p>
-    </section>
+      <p>We do not use your information for automated decision-making that produces legal or similarly significant effects without human involvement.</p>
+    </div>
 
-    <section>
-      <h2>8. Security</h2>
-      <p>We implement industry-standard security measures including encrypted data transmission (TLS), access controls, and secure cloud infrastructure. While we take reasonable steps to protect your information, no system is completely secure.</p>
-    </section>
-
-    <section>
-      <h2>9. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. We will notify users of material changes by updating the effective date at the top of this page. Continued use of our services after changes constitutes acceptance of the updated policy.</p>
-    </section>
-
-    <section>
-      <h2>10. Contact Us</h2>
-      <p>For questions, data requests, or opt-out assistance, contact us at:</p>
+    <!-- 4 -->
+    <div class="section" id="sharing">
+      <span class="section-number">04</span>
+      <h2>Sharing Your Information</h2>
+      <p>We do not sell, rent, or trade your personal information to third parties. We may share your information only in the following limited circumstances:</p>
       <ul>
-        <li>Email: <a href="mailto:privacy@jlocollective.com">privacy@jlocollective.com</a></li>
-        <li>Business: jlocollective</li>
-        <li>Platform: SIGND.AI</li>
+        <li><strong>Service Providers:</strong> Third-party vendors who assist us in delivering services (e.g., SMS delivery platforms, CRM systems). These providers are bound by confidentiality obligations and may not use your data for their own purposes.</li>
+        <li><strong>Legal Compliance:</strong> When required by law, court order, or governmental authority.</li>
+        <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of business assets, with appropriate notice to you.</li>
+        <li><strong>With Your Consent:</strong> For any other purpose, only with your explicit consent.</li>
       </ul>
-    </section>
+      <p>Our SMS communications are facilitated through Twilio, Inc., a third-party SMS platform. Your phone number is transmitted to Twilio solely for the purpose of message delivery and is not shared with other Twilio customers.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="section" id="retention">
+      <span class="section-number">05</span>
+      <h2>Data Retention</h2>
+      <p>We retain your personal information for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required by law. Specifically:</p>
+      <ul>
+        <li>Active lead records: retained while your inquiry is open and for up to 2 years after last contact</li>
+        <li>Opt-out records: retained indefinitely to ensure we honor your opt-out preference</li>
+        <li>Communication logs: retained for up to 3 years for compliance and legal purposes</li>
+      </ul>
+      <p>You may request deletion of your personal data at any time by contacting us, subject to any legal obligations that require retention.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="section" id="your-rights">
+      <span class="section-number">06</span>
+      <h2>Your Rights</h2>
+      <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+      <ul>
+        <li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
+        <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
+        <li><strong>Deletion:</strong> Request deletion of your personal information</li>
+        <li><strong>Opt-Out of SMS:</strong> Reply STOP to any text message at any time</li>
+        <li><strong>Withdraw Consent:</strong> Withdraw consent for communications at any time</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a>. We will respond to verified requests within 30 days.</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="section" id="security">
+      <span class="section-number">07</span>
+      <h2>Security</h2>
+      <p>We implement reasonable technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. These measures include encrypted data transmission, access controls, and secure cloud infrastructure.</p>
+      <p>No method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="section" id="children">
+      <span class="section-number">08</span>
+      <h2>Children's Privacy</h2>
+      <p>Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If we become aware that a child under 18 has provided us with personal information, we will delete it promptly. If you believe we have inadvertently collected information from a minor, please contact us immediately.</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="section" id="changes">
+      <span class="section-number">09</span>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or legal requirements. When we make material changes, we will update the "Last Updated" date at the top of this page.</p>
+      <p>We encourage you to review this policy periodically. Continued use of our services after changes become effective constitutes acceptance of the revised policy.</p>
+    </div>
+
+    <!-- 10 -->
+    <div class="section" id="contact">
+      <span class="section-number">10</span>
+      <h2>Contact Us</h2>
+      <p>If you have questions, concerns, or requests regarding this Privacy Policy or how we handle your personal information, please reach out:</p>
+      <div class="contact-card">
+        <p><strong>JLO Collective</strong><br />
+        Real Estate Services<br />
+        Stockton, California<br /><br />
+        📧 <a href="mailto:jlo.collective@gmail.com">jlo.collective@gmail.com</a><br /><br />
+        For SMS opt-out: Reply <strong>STOP</strong> to any text message, or email us at the address above.</p>
+      </div>
+    </div>
 
   </main>
+</div>
 
-  <footer>
-    <p>© 2026 jlocollective · SIGND.AI · All rights reserved.</p>
-  </footer>
+<!-- ── Footer ── -->
+<footer>
+  <p>© 2025 JLO Collective. All rights reserved. &nbsp;·&nbsp;
+  <a href="/jlocollective-legal/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+  <a href="/jlocollective-legal/terms.html">Terms &amp; Conditions</a>
+  </p>
+</footer>
 
 </body>
 </html>
