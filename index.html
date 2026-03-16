@@ -3,351 +3,487 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — SIGND.AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>SMS Consent & Legal — SIGND.AI / DJ Reano at LGI Homes</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:          #080909;
-      --surface:     #111314;
-      --border:      #1e2123;
-      --blue:        #1E7FE8;
-      --blue-light:  #4CB8FF;
-      --text:        #eeecea;
-      --text-2:      #7a8080;
-      --text-3:      #3d4242;
-      --radius:      10px;
+      --bg: #0d0d0f;
+      --surface: #141416;
+      --border: #242428;
+      --text: #e8e8ec;
+      --muted: #8a8a96;
+      --accent: #10b981;
+      --accent-dim: rgba(16,185,129,0.12);
+      --danger: #ef4444;
+      --radius: 10px;
+      --font: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', monospace;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
 
     body {
+      font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 1.75;
       min-height: 100vh;
+      line-height: 1.6;
     }
 
-    /* subtle grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── header ── */
+    /* ── Header ── */
     header {
-      position: relative;
-      z-index: 1;
       border-bottom: 1px solid var(--border);
-      padding: 24px 48px;
+      padding: 18px 32px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .logo-icon {
+    .logo-mark {
       width: 32px;
       height: 32px;
-      border-radius: 7px;
-    }
-
-    .logo-wordmark {
-      display: flex;
-      align-items: baseline;
-      gap: 0;
-      line-height: 1;
-    }
-
-    .logo-signd {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.03em;
-      color: #C8D4E0;
-    }
-
-    .logo-dot-ai {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.03em;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .badge {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--text-3);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 99px;
-    }
-
-    /* ── main ── */
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 72px 48px 120px;
-    }
-
-    .page-label {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 14px;
-    }
-
-    .effective-date {
-      font-size: 0.82rem;
-      color: var(--text-3);
-      margin-bottom: 60px;
-      padding-bottom: 36px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section {
-      margin-bottom: 48px;
-    }
-
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text);
-      margin-bottom: 14px;
-      letter-spacing: -0.01em;
-    }
-
-    p {
-      font-size: 0.93rem;
-      color: var(--text-2);
-      margin-bottom: 14px;
-    }
-
-    ul {
-      list-style: none;
-      margin-bottom: 14px;
-    }
-
-    ul li {
-      font-size: 0.93rem;
-      color: var(--text-2);
-      padding: 5px 0 5px 20px;
-      position: relative;
-    }
-
-    ul li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 0.82rem;
-    }
-
-    a {
-      color: var(--blue-light);
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    strong { color: var(--text); font-weight: 500; }
-
-    .highlight-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--blue);
-      padding: 18px 22px;
-      border-radius: var(--radius);
-      margin-bottom: 14px;
-    }
-
-    .highlight-box p { margin-bottom: 0; font-size: 0.90rem; }
-
-    /* ── footer ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 28px 48px;
+      background: var(--accent);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: #000;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--text); }
+    nav a.active { color: var(--accent); }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    .page-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    /* ── Opt-in Form Card ── */
+    .optin-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .optin-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .optin-card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .optin-card .card-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .field-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 560px) {
+      .field-group { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 11px 14px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    /* ── Consent Disclosure Box ── */
+    .consent-box {
+      background: var(--accent-dim);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin: 20px 0;
+    }
+
+    .consent-box p {
+      font-size: 12.5px;
+      color: #a7f3d0;
+      line-height: 1.65;
+    }
+
+    .consent-box strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── Submit Button ── */
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: -0.2px;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* ── Success state ── */
+    .success-msg {
+      display: none;
+      background: var(--accent-dim);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .success-msg.show { display: block; }
+
+    .success-msg p {
+      font-size: 14px;
+      color: #a7f3d0;
+    }
+
+    /* ── Privacy Policy Section ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    h2.policy-heading {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .policy-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      font-family: var(--mono);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 32px 0 10px;
+      letter-spacing: -0.2px;
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    ul {
+      margin: 8px 0 16px 18px;
+    }
+
+    ul li {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     footer p {
-      font-size: 0.78rem;
-      color: var(--text-3);
+      font-size: 12px;
+      color: var(--muted);
       margin: 0;
     }
 
-    .footer-dot { color: var(--border); }
-
-    @media (max-width: 600px) {
-      header { padding: 18px 20px; }
-      main { padding: 48px 20px 80px; }
-      footer { padding: 24px 20px; flex-wrap: wrap; justify-content: center; }
+    footer nav {
+      margin-left: 0;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a class="logo" href="#">
-      <img class="logo-icon" src="data:image/png;base64,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" alt="SIGND.AI icon" />
-      <div class="logo-wordmark">
-        <span class="logo-signd">SIGND</span><span class="logo-dot-ai">.AI</span>
-      </div>
-    </a>
-    <div class="badge">Legal</div>
+    <div class="logo-mark">S</div>
+    <span class="logo-text">SIGND.AI</span>
+    <nav>
+      <a href="/jlocollective-legal/" class="active">Legal</a>
+      <a href="/jlocollective-legal/terms">Terms</a>
+    </nav>
   </header>
 
   <main>
-    <div class="page-label">Legal Document</div>
-    <h1>Privacy Policy</h1>
-    <p class="effective-date">Effective Date: March 1, 2026 &nbsp;·&nbsp; Last Updated: March 8, 2026</p>
+    <div class="page-label">SMS Consent &amp; Legal</div>
+    <h1>DJ Reano — LGI Homes</h1>
+    <p class="subtitle">SMS opt-in consent, privacy policy, and messaging disclosures for real estate lead communications.</p>
 
-    <section>
-      <h2>1. Overview</h2>
-      <p>SIGND.AI ("we," "us," or "our") is a software platform operated by jlocollective that provides automated real estate lead response and follow-up services for licensed real estate agents. This Privacy Policy explains how we collect, use, disclose, and protect personal information in connection with our services.</p>
-      <p>By using our platform or receiving communications facilitated through our system, you agree to the terms described in this policy.</p>
-    </section>
+    <!-- ── OPT-IN FORM — This is what TCR reviewers verify ── -->
+    <div class="optin-card">
+      <h2>Request Home Information via SMS</h2>
+      <p class="card-sub">Submit your inquiry to receive automated updates from DJ Reano at LGI Homes.</p>
 
-    <section>
-      <h2>2. Information We Collect</h2>
-      <p>We collect the following categories of personal information:</p>
-      <ul>
-        <li>Full name and contact information (phone number, email address)</li>
-        <li>Property inquiry details submitted through real estate platforms</li>
-        <li>SMS and communication history between leads and agents</li>
-        <li>Device and usage data when interacting with our platform</li>
-        <li>Agent account information including name, brokerage, and credentials</li>
-      </ul>
-    </section>
+      <form id="optinForm" onsubmit="handleSubmit(event)" novalidate>
+        <div class="field-group">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Maria" required />
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Garcia" />
+          </div>
+        </div>
 
-    <section>
-      <h2>3. How We Use Your Information</h2>
-      <p>We use collected information for the following purposes:</p>
-      <ul>
-        <li>Sending automated and agent-approved SMS follow-up messages to real estate inquiries</li>
-        <li>Managing lead pipelines and sales sequences on behalf of real estate agents</li>
-        <li>Improving AI response quality and platform performance</li>
-        <li>Complying with legal obligations including TCPA and carrier regulations</li>
-        <li>Providing platform analytics and reporting to agents</li>
-      </ul>
-    </section>
+        <div class="field-group">
+          <div class="field">
+            <label for="phone">Mobile Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (209) 555-0100" required />
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="maria@email.com" />
+          </div>
+        </div>
 
-    <section>
-      <h2>4. SMS Messaging &amp; Opt-Out</h2>
-      <div class="highlight-box">
-        <p>End users who have submitted inquiries through real estate platforms consent to receive SMS communications regarding their property inquiry. Every message sent through our platform includes opt-out instructions.</p>
+        <div class="field-group">
+          <div class="field full">
+            <label for="interest">I'm interested in</label>
+            <input type="text" id="interest" name="interest" placeholder="New homes in Stockton, CA" />
+          </div>
+        </div>
+
+        <!-- ── CONSENT DISCLOSURE — Must match CTA field exactly ── -->
+        <div class="consent-box">
+          <p>
+            By submitting this form, you agree to receive automated SMS messages from <strong>DJ Reano at LGI Homes</strong> regarding your real estate inquiry.
+            Reply <strong>STOP</strong> to unsubscribe. Reply <strong>HELP</strong> for assistance.
+            Message and data rates may apply. Message frequency varies.
+            <strong>Consent is not a condition of purchase.</strong>
+            End users can opt out at any time by replying STOP, and will receive an immediate confirmation message.
+          </p>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Inquiry &amp; Consent to SMS</button>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <p>✅ Thank you! DJ will be in touch shortly via SMS.</p>
       </div>
-      <p>To stop receiving messages at any time, reply <strong>STOP</strong> to any SMS you receive. Your number will be immediately added to our opt-out list and no further messages will be sent.</p>
-      <p>Message and data rates may apply. Message frequency varies based on inquiry activity.</p>
-    </section>
+    </div>
 
-    <section>
-      <h2>5. Information Sharing</h2>
-      <p>We do not sell personal information. We may share information with:</p>
-      <ul>
-        <li>Licensed real estate agents using our platform to respond to your inquiry</li>
-        <li>Twilio Inc. for SMS delivery services</li>
-        <li>Anthropic for AI message generation (no PII retained by Anthropic)</li>
-        <li>Infrastructure providers (Railway, cloud hosting) under data processing agreements</li>
-        <li>Law enforcement or legal process when required by law</li>
-      </ul>
-    </section>
+    <!-- ── PRIVACY POLICY ── -->
+    <hr class="divider" />
+    <div class="section-label">Privacy Policy</div>
 
-    <section>
-      <h2>6. Data Retention</h2>
-      <p>We retain lead and communication data for up to 24 months from the date of last activity, or as required by applicable law. Agents may request deletion of their account data at any time. Opt-out records are retained indefinitely to ensure compliance.</p>
-    </section>
+    <h2 class="policy-heading">Privacy Policy</h2>
+    <p class="policy-meta">Effective Date: March 1, 2026 · Last Updated: March 8, 2026</p>
 
-    <section>
-      <h2>7. Your Rights</h2>
-      <p>Depending on your location, you may have the right to:</p>
-      <ul>
-        <li>Access the personal information we hold about you</li>
-        <li>Request correction or deletion of your data</li>
-        <li>Opt out of SMS communications at any time by replying STOP</li>
-        <li>Lodge a complaint with a data protection authority</li>
-      </ul>
-      <p>To exercise these rights, contact us at the email below.</p>
-    </section>
+    <h3>1. Overview</h3>
+    <p>SIGND.AI ("we," "us," or "our") is a software platform operated by JLO Collective that provides automated real estate lead response and follow-up services for licensed real estate agents. This Privacy Policy explains how we collect, use, disclose, and protect personal information in connection with our services.</p>
+    <p>By using our platform or receiving communications facilitated through our system, you agree to the terms described in this policy.</p>
 
-    <section>
-      <h2>8. Security</h2>
-      <p>We implement industry-standard security measures including encrypted data transmission (TLS), access controls, and secure cloud infrastructure. While we take reasonable steps to protect your information, no system is completely secure.</p>
-    </section>
+    <h3>2. Information We Collect</h3>
+    <p>We collect the following categories of personal information:</p>
+    <ul>
+      <li>Full name and contact information (phone number, email address)</li>
+      <li>Property inquiry details submitted through real estate platforms</li>
+      <li>SMS and communication history between leads and agents</li>
+      <li>Device and usage data when interacting with our platform</li>
+      <li>Agent account information including name, brokerage, and credentials</li>
+    </ul>
 
-    <section>
-      <h2>9. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. We will notify users of material changes by updating the effective date at the top of this page. Continued use of our services after changes constitutes acceptance of the updated policy.</p>
-    </section>
+    <h3>3. How We Use Your Information</h3>
+    <ul>
+      <li>Sending automated and agent-approved SMS follow-up messages to real estate inquiries</li>
+      <li>Managing lead pipelines and sales sequences on behalf of real estate agents</li>
+      <li>Improving AI response quality and platform performance</li>
+      <li>Complying with legal obligations including TCPA and carrier regulations</li>
+      <li>Providing platform analytics and reporting to agents</li>
+    </ul>
 
-    <section>
-      <h2>10. Contact Us</h2>
-      <p>For questions, data requests, or opt-out assistance, contact us at:</p>
-      <ul>
-        <li>Email: <a href="mailto:privacy@jlocollective.com">privacy@jlocollective.com</a></li>
-        <li>Business: jlocollective</li>
-        <li>Platform: SIGND.AI</li>
-      </ul>
-    </section>
+    <h3>4. SMS Messaging &amp; Opt-Out</h3>
+    <p>End users who submit inquiries through this form consent to receive SMS communications regarding their property inquiry. Every message includes opt-out instructions.</p>
+    <p>To stop receiving messages at any time, reply <strong>STOP</strong> to any SMS. Your number will be immediately added to our opt-out list and no further messages will be sent.</p>
+    <p>Message and data rates may apply. Message frequency varies based on inquiry activity.</p>
 
+    <h3>5. Information Sharing</h3>
+    <p>We do not sell personal information. We may share information with:</p>
+    <ul>
+      <li>Licensed real estate agents using our platform to respond to your inquiry</li>
+      <li>Twilio Inc. for SMS delivery services</li>
+      <li>Anthropic for AI message generation (no PII retained by Anthropic)</li>
+      <li>Infrastructure providers (Railway, cloud hosting) under data processing agreements</li>
+      <li>Law enforcement or legal process when required by law</li>
+    </ul>
+
+    <h3>6. Data Retention</h3>
+    <p>We retain lead and communication data for up to 24 months from the date of last activity, or as required by applicable law. Agents may request deletion of their account data at any time. Opt-out records are retained indefinitely to ensure compliance.</p>
+
+    <h3>7. Your Rights</h3>
+    <ul>
+      <li>Access the personal information we hold about you</li>
+      <li>Request correction or deletion of your data</li>
+      <li>Opt out of SMS communications at any time by replying STOP</li>
+      <li>Lodge a complaint with a data protection authority</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href="mailto:privacy@jlocollective.com">privacy@jlocollective.com</a>.</p>
+
+    <h3>8. Security</h3>
+    <p>We implement industry-standard security measures including encrypted data transmission (TLS), access controls, and secure cloud infrastructure. While we take reasonable steps to protect your information, no system is completely secure.</p>
+
+    <h3>9. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. We will notify users of material changes by updating the effective date at the top of this page.</p>
+
+    <h3>10. Contact Us</h3>
+    <p>Email: <a href="mailto:privacy@jlocollective.com">privacy@jlocollective.com</a><br />
+    Business: JLO Collective / SIGND.AI<br />
+    Stockton, California</p>
   </main>
 
   <footer>
-    <p>© 2026 jlocollective</p>
-    <span class="footer-dot">·</span>
-    <p>SIGND.AI</p>
-    <span class="footer-dot">·</span>
-    <p>All rights reserved.</p>
+    <p>© 2026 JLO Collective · SIGND.AI · All rights reserved.</p>
+    <nav>
+      <a href="/jlocollective-legal/">Privacy Policy</a>
+      <a href="/jlocollective-legal/terms">Terms &amp; Conditions</a>
+    </nav>
   </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('optinForm');
+      const success = document.getElementById('successMsg');
+      // Show success — in production this would POST to your API
+      form.style.display = 'none';
+      success.classList.add('show');
+    }
+  </script>
 
 </body>
 </html>
