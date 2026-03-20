@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Message — SIGND.AI</title>
+  <title>SIGND.AI — Message Action</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,11 +18,9 @@
       --error: #ff5c5c;
       --success: #3cffa0;
     }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 24px; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; width: 100%; max-width: 520px; animation: fadeUp 0.3s ease both; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-    
-    .logo span { color: var(--accent); }
     h1 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 8px; }
     .sub { font-size: 0.85rem; color: var(--text-2); margin-bottom: 28px; line-height: 1.5; }
     label { display: block; font-size: 0.72rem; font-weight: 500; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
@@ -48,58 +46,37 @@
     .result-sub { font-size: 0.85rem; color: var(--text-2); }
     .form-area { transition: opacity 0.2s; }
     .form-area.hide { opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
-  
-    /* ── SIGND.AI Wordmark ── */
-    .signd-wordmark {
-      display: flex;
-      align-items: baseline;
-      gap: 0;
-      line-height: 1;
-    }
-    .signd-name {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
-      color: #C8D4E0;
-    }
-    .signd-dot {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .signd-ai {
-      font-family: 'Syne', 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
-      background: linear-gradient(90deg, #1E7FE8, #4CB8FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
+    /* Auto-approve loading state */
+    .auto-approve { text-align: center; padding: 48px 0; }
+    .auto-approve .spinner { display: block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto 16px; }
+    .auto-approve p { color: var(--text-2); font-size: 0.9rem; }
+    /* Wordmark */
+    .signd-wordmark { display: flex; align-items: baseline; gap: 0; line-height: 1; }
+    .signd-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; color: #C8D4E0; }
+    .signd-dot { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: linear-gradient(90deg, #1E7FE8, #4CB8FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .signd-ai { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; background: linear-gradient(90deg, #1E7FE8, #4CB8FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   </style>
 </head>
 <body>
   <div class="signd-wordmark">
-  <span class="signd-name">SIGND</span><span class="signd-dot">.</span><span class="signd-ai">AI</span>
-</div>
+    <span class="signd-name">SIGND</span><span class="signd-dot">.</span><span class="signd-ai">AI</span>
+  </div>
+
   <div class="card">
-    
 
-    <div class="form-area" id="formArea">
+    <!-- Auto-approve loading (shown briefly for action=approve) -->
+    <div class="auto-approve" id="autoApprove" style="display:none;">
+      <div class="spinner"></div>
+      <p>Sending message…</p>
+    </div>
+
+    <!-- Edit form (shown for action=edit) -->
+    <div class="form-area" id="formArea" style="display:none;">
       <h1>Edit Message</h1>
-      <p class="sub" id="subText">Review and edit the AI-drafted SMS before it sends to your lead.</p>
-
+      <p class="sub">Review and edit the AI-drafted SMS before it sends to your lead.</p>
       <label>SMS Message</label>
       <textarea id="msgArea" maxlength="160" oninput="updateCount()"></textarea>
       <div class="char-count" id="charCount">0 / 160</div>
-
       <div class="btn-row">
         <button class="btn btn-primary" id="sendBtn" onclick="sendEdited()">
           <span class="btn-label">✅ Send Message</span>
@@ -109,41 +86,90 @@
       </div>
     </div>
 
+    <!-- Result screen (shown after any action completes) -->
     <div class="result" id="result">
       <div class="result-icon" id="resultIcon"></div>
       <div class="result-title" id="resultTitle"></div>
-      <div class="result-sub" id="resultSub">You can close this tab.</div>
+      <div class="result-sub">You can close this tab.</div>
     </div>
+
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    const draft = params.get('draft');
+    const id     = params.get('id');
+    const draft  = params.get('draft');
     const secret = params.get('secret');
-    const base = params.get('base') || 'https://diligent-motivation-production-d330.up.railway.app';
+    const action = params.get('action') || 'edit'; // 'approve' | 'edit' | 'skip'
+    const base   = params.get('base') || 'https://diligent-motivation-production-d330.up.railway.app';
 
-    if (!id || !secret) {
-      document.getElementById('subText').textContent = 'Invalid link. Please use the button from Slack.';
-      document.getElementById('msgArea').disabled = true;
-      document.getElementById('sendBtn').disabled = true;
-    } else {
-      document.getElementById('msgArea').value = draft || '';
-      updateCount();
+    function showResult(icon, title) {
+      document.getElementById('autoApprove').style.display = 'none';
+      document.getElementById('formArea').classList.add('hide');
+      document.getElementById('resultIcon').textContent = icon;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('result').classList.add('show');
     }
 
+    // ── APPROVE: fire immediately, no UI shown ──────────────────
+    async function autoApprove() {
+      document.getElementById('autoApprove').style.display = 'block';
+      try {
+        const res = await fetch(`${base}/api/approvals/${id}/approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-webhook-secret': secret },
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error || 'Failed');
+        showResult('✅', 'Message Sent!');
+      } catch (err) {
+        showResult('❌', 'Error: ' + err.message);
+      }
+    }
+
+    // ── EDIT: show the textarea form ────────────────────────────
+    function initEdit() {
+      document.getElementById('formArea').style.display = 'block';
+      if (!id || !secret) {
+        document.getElementById('formArea').querySelector('.sub').textContent = 'Invalid link. Please use the button from Slack.';
+        document.getElementById('msgArea').disabled = true;
+        document.getElementById('sendBtn').disabled = true;
+      } else {
+        document.getElementById('msgArea').value = draft || '';
+        updateCount();
+      }
+    }
+
+    // ── SKIP: fire immediately ──────────────────────────────────
+    async function autoSkip() {
+      document.getElementById('autoApprove').style.display = 'block';
+      document.getElementById('autoApprove').querySelector('p').textContent = 'Skipping…';
+      try {
+        await fetch(`${base}/api/approvals/${id}/reject`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-webhook-secret': secret },
+        });
+      } catch {}
+      showResult('⏭️', 'Message Skipped');
+    }
+
+    // ── Route on load ───────────────────────────────────────────
+    if (!id || !secret) {
+      showResult('⚠️', 'Invalid Link');
+    } else if (action === 'approve') {
+      autoApprove();
+    } else if (action === 'skip') {
+      autoSkip();
+    } else {
+      initEdit();
+    }
+
+    // ── Edit form helpers ───────────────────────────────────────
     function updateCount() {
       const len = document.getElementById('msgArea').value.length;
       const el = document.getElementById('charCount');
       el.textContent = `${len} / 160`;
       el.className = 'char-count' + (len > 150 ? ' warn' : '');
-    }
-
-    function showResult(icon, title) {
-      document.getElementById('formArea').classList.add('hide');
-      document.getElementById('resultIcon').textContent = icon;
-      document.getElementById('resultTitle').textContent = title;
-      document.getElementById('result').classList.add('show');
     }
 
     async function sendEdited() {
@@ -152,7 +178,6 @@
       const btn = document.getElementById('sendBtn');
       btn.classList.add('loading');
       btn.disabled = true;
-
       try {
         const res = await fetch(`${base}/api/approvals/${id}/edit`, {
           method: 'POST',
